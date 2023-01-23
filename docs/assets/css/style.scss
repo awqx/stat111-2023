@@ -1,0 +1,70 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+:root {
+	--background: #202020;
+	--gold: #d6ba7c;
+	--jade: #00a86b;
+	--lightjade: #6ecc8c; 
+	--purple: #6459c2; 
+	--lightpurple: #8a8bd4; 
+	--gray: #4e525c;
+	--darkgray: #2a2a2a;
+	--white: #ffffff;
+	--cyan: #51bce0; 
+	--stat111blue: #0182ce; 
+	--stat111lightblue: #8bd4ff; 
+}
+
+/* Import fonts */
+@font-face {
+    font-family: 'Roboto';
+    src: url("../Roboto-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url("../Rubik-VariableFont_wght.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url("../RobotoMono-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Assign background colors */
+body {
+  background: var(--background); 
+}
+
+code, .highlight {
+  background: var(--darkgray); 
+  font-family: Roboto Mono, Consolas, monospace; 
+  color: var(--white);
+  font-size: 10pt; 
+}
+
+/* Text formatting */
+body, strong {
+  font-family: Rubik Light, Roboto Light, Segoe UI, sans-serif; 
+  color: var(--white); 
+  font-size: 11pt; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--stat111blue);
+  font-family: Roboto Mono, Consolas, monospace; 
+  weight: normal; 
+}
+
+a, a:hover, a:visited {
+  color: var(--stat111lightblue); 
+}
