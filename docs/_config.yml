@@ -21,10 +21,10 @@
 title: Course Notes
 email: axin@college.harvard.edu
 description: >- # this means to ignore newlines until "baseurl:"
-  Resources for students in STAT111 (Spring 2022). Managed by aL Xin.
-absolute_url: "/stat111-2022"
-relative_url:"/stat111-2022"
-baseurl: "/stat111-2022" # the subpath of your site, e.g. /blog
+  Resources for students in STAT111 (Spring 2023). Managed by aL Xin.
+# absolute_url: "/stat111-2022"
+# relative_url: "/stat111-2022"
+baseurl: "/stat111" # the subpath of your site, e.g. /blog
 url: "https://awqx.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: al_xin
 github_username:  awqx
