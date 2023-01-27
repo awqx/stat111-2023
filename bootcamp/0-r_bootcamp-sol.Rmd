@@ -541,7 +541,13 @@ We're often concerned with finding the value of a parameter that maximizes the p
 
 #### 1.1
 
-Create 20 random observations from a $\text{Pois}(3)$ r.v. Suppose we know that the data are i.i.d. $\text{Pois}$ observations but we don't know that $\lambda = 3$. For each $\lambda$ in $\{0.1, 0.2, 0.3, \dots, 4.9, 5\}$, find the likelihood of your data. I.e. for each $\lambda$, find $P(Y_1 = y_1, Y_2 = y_2, \dots, Y_{100} = y_{100} | \lambda)$. Save these likelihoods in some vector. 
+Create 20 random observations from a $\text{Pois}(3)$ r.v. Suppose we know that the data are i.i.d. $\text{Pois}$ observations but we don't know that $\lambda = 3$. For each $\lambda$ in $\{0.01, 0.02, 0.03, \dots, 4.99, 5\}$, find the likelihood of your data. I.e. for each $\lambda$, find $P(Y_1 = y_1, Y_2 = y_2, \dots, Y_{100} = y_{100} | \lambda)$. Save these likelihoods in some vector. 
+
+**Solution**: It would help to know the 
+
+```{r q1_1}
+x <- rpois(20, 3)
+```
 
 #### 1.2
 

@@ -345,6 +345,13 @@ R has a variety of example data sets that you can look through using the functio
 
 *Which of the flower species has the widest petals, on average?*
 
+<details>
+<summary>See answer</summary>
+<br>
+Virginica. There are a few ways to solve this, one of which involves taking the average of every single group. For example, <code class="language-plaintext highlighter-rouge">mean(iris[iris$Species == "virginica", "Petal.Length"])</code>. There's a "cleaner" solution in Section 3.5.
+</details>
+
+
 ### 3.4 Miscellaneous useful commands
 
 To view the first few rows of a data frame or first few elements of a vector/list, use `head()`. To view the last elements, use `tail()`. You can supply an optional second argument specifying the number of elements you want to see.  
@@ -367,6 +374,7 @@ iris %>%
   top_n(1, petal_width_avg) %>%
   .$Species
 ```
+
 ## 4 Iteration
 
 ### 4.1 For loops
