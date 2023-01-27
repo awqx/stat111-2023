@@ -685,15 +685,15 @@ adjust the header for R code chunks to cache the results of the chunk. This will
 prevent the chunk from executing in subsequent knits if it is detected that the
 contents of the file have not been modified.
 
-```{r cache_example, cache = T}
-# Check the R Markdown source to see how this is done!
+```
+# E.g., {r cache_example, cache = T}
 ```
 
 However, it is also possible to manually save files. This is useful because using
 caching can come with caveats and you may invalidate your cache unexpectedly. To
 manually save R objects, use `saveRDS` and `readRDS`.
 
-```{r rds_example, eval = F}
+```
 # Let `helium` be the R object of interest
 # You can name the file anything you want
 saveRDS(helium, file = "helium.RDS")
