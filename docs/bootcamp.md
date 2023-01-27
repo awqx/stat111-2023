@@ -4,7 +4,7 @@ title: R Bootcamp
 rank: 3
 ---
 
-I use Windows, so I may get some MacOS shortcuts wrong. 
+I use Windows, so I may get some MacOS shortcuts wrong.
 
 To get the most mileage from this document, I suggest having both the R Markdown file open  alongside the PDF or webpage. By default, the chunks are set to not evaluate using `eval = F` (see the source). If you want to see results from each chunk, remove `eval = F` from the very first chunk in the source `.Rmd` file and recompile the document.
 
@@ -27,7 +27,7 @@ In RStudio, you can "knit" R Markdown files to produce documents that execute th
 To use LaTEX in R Markdown, you need to install a compatible LaTEX engine. I think `tinytex` is the best option here because it's hasslefree. Here's how you'd load it into R:
 
 
-```{r, eval=F}
+```
 install.packages("tinytex")
 tinytex::install_tinytex()
 ```
@@ -46,7 +46,7 @@ Some features of R:
 Arithmetic in R automatically follows order of operations. Symbols are consistent
 with most other coding languages. 
 
-```{r math_example}
+```
 # Demonstration of arithmetic
 # This equals 111
 11 + 4 * 5 ^ 2
@@ -67,7 +67,7 @@ R does type assignment automatically; just assign whatever value you need to a v
 
 You can check data type with the function `class()`.
 
-```{r variable_example, eval = T}
+```
 # Create a numeric variable approximately equal to sqrt(2)
 x <- 1.41421
 x = 1.41421 # discouraged, but possible
@@ -83,7 +83,7 @@ Create vectors using the function `c()`. Index a vector to obtain its components
 
 Remove elements of a vector through indexing with negative integers. 
 
-```{r vector_example}
+```
 x <- c("hydrogen", 1, 1.01, "gas")
 x[1]
 
@@ -109,7 +109,7 @@ x
 
 You can also name the components of a vector and index based on name, though this is also rarely used in STAT 111. 
 
-```{r vector_name}
+```
 names(x) <- c("name", "number", "mass")
 x["number"]
 ```
@@ -118,7 +118,7 @@ x["number"]
 
 Vectors in R support element-wise operations, which is best illustrated through examples.
 
-```{r}
+```
 # Arithmetic of vectors of the same length
 c(50, 51, 61) + c(110, 111, 139)
 
@@ -137,7 +137,7 @@ c(1, 2, 3) * c(110, 111, 139)
 
 Standard practice in R is to use `<-` when assigning a value to a variable. When checking for equality, use `==`, i.e., `x == 2`. When assigning arguments, use single equals signs. For example, `mean(c(1, 2, 3, NA), na.rm = T)`.
 
-```{r}
+```
 c(110, 51, 61) == c(110, 111, 139)
 ```
 
@@ -147,7 +147,7 @@ For more flexibility, we can use lists, which are ordered collections of element
 
 Create lists using `list()`. The components of lists can also be named. Index lists with double square brackets. 
 
-```{r list_example}
+```
 # Instead of using names(), you can create lists with components already named
 # The same applies for vectors
 x <- list(
@@ -170,13 +170,13 @@ Sample variance can be calculated for a vector using the function `var()`. Check
 
 Recall that sample variance is calculated as
 
-$$
+\\[
 \text{Var}(\mathbf{x}) = \frac{1}{n-1}\sum_{i = 1}^n (x_i - \bar{x})^2.
-$$
+\\]
 
 If you look at the `.Rmd` source here, you'll see a good example of how to format LaTeX in the file. For display style equations, use double dollar signs; for inline style equations, use single dollar signs.
 
-```{r}
+```
 set.seed(111)
 x <- rnorm(11234)
 1/(length(x) - 1) * sum((x - mean(x))^2)
@@ -196,15 +196,15 @@ To install R packages, use the function `install.packages()` with the package na
 R has built-in functions for working with many probability distributions covered in STAT 111. For any family of distributions in R (Binomial, Normal, etc.), there are four functions. For example, with Normal distributions, we have:
 
 - `dnorm(x, mean = mu, sd = sigma)`: Returns the probability density evaluated at `x` for a Normal distribution with mean `mu` and standard deviation `sigma`. Be careful to specify the standard deviation, *not* the variance.
-  - This is equivalent to $\phi((x - \mu)/\sigma)$ 
+  - This is equivalent to \\( \phi((x - \mu)/\sigma) \\) 
 - `pnorm(q, mean = mu, sd = sigma)`: Returns the CDF evaluated at `q`.
-  - Equivalent to $\Phi((x - \mu)/\sigma)$
-- `qnorm(p, mu, sigma)`: Returns the value corresponding to $p$th quantile.
-- `rnorm(n, my, sigma)`: Returns $n$ i.i.d. observations from the Normal r.v.
+  - Equivalent to \\(\Phi((x - \mu)/\sigma) \\)
+- `qnorm(p, mu, sigma)`: Returns the value corresponding to \\(p \\)th quantile.
+- `rnorm(n, my, sigma)`: Returns \\(n \\) i.i.d. observations from the Normal r.v.
 
 The prefixes `d`, `p`, `q`, and `r` and the first arguments are consistent between probability distributions. However, different distributions require additional arguments to be specified. For example, to generate 10 i.i.d. observations with distribution `\text{Bin}(n, p)`, we would use the function call `rbinom(10, size = n, prob = p)`.
 
-```{r}
+```
 # What are the outputs for each of these?
 dnorm(0)
 pnorm(0)
@@ -218,7 +218,7 @@ Recall that the Law of Large Numbers (LLN) states that the sample mean of i.i.d.
 
 *Choose a distribution and generate samples of various sizes to observe the LLN.*
 
-```{r}
+```
 x <- lapply(
   c(10 * c(1:10), 1000, 10000, 100000), 
   rexp, 
@@ -234,14 +234,14 @@ y <- lapply(x, mean)
 
 Matrices in R can be created using `matrix()`. The first argument is a vector containing the data for the matrix. The second argument is the number of rows or columns and whether the data should be read by row or by column. Default behavior is to read data by columns. 
 
-```{r matrix, eval = T}
+```
 X <- matrix(c(1, 1, 0, 1, 1, 1, 1, 3, 9), nrow = 3, byrow = T)
 X
 ```
 
 R can handle various matrix operations. First, indexing can be accomplished using single square brackets. First element is row, and second element is column.
 
-```{r matrix_ops}
+```
 # Get a row of the matrix
 X[1, ]
 
@@ -266,7 +266,7 @@ XtX %*% XtX_inverse
 
 Matrices can be modified like vectors, though indexing for a single element requires both the row and column coordinate. 
 
-```{r matrix_mod, eval = F}
+```
 # Change a single element at the [2,2] position
 X[2, 2] <- 5
 
@@ -284,7 +284,7 @@ X <- matrix(c(1, 1, 0, 1, 1, 1, 1, 3, 9), nrow = 3, byrow = T)
 
 Data frames are more flexible than matrices. They can be created from matrices or created by supplying the columns. The two methods shown below create the same data frame. 
 
-```{r dataframe, eval = T}
+```
 Y <- data.frame(X)
 names(Y) <- c("Q", "W", "E")
 Y
@@ -303,7 +303,7 @@ We can access the columns of a data frame by name using the dollar sign, double 
 
 By supplying elements to a new index, you can also add elements to the data frame.
 
-```{r dataframe_index}
+```
 # The following commands return the same element: the first column of Y
 Y[["Q"]]
 Y[[1]]
@@ -334,7 +334,7 @@ Y <- Y[, -4]
 
 We can filter data frames by supplying Boolean vectors when indexing. Additionally, because of the helpful element-wise properties of R vectors, we can use this property to sort data frames.
 
-```{r dataframe_filter, eval = T}
+```
 # We want rows of the data frame where the second element is 1
 Y[Y$W == 1, ]
 ```
@@ -349,7 +349,7 @@ R has a variety of example data sets that you can look through using the functio
 
 To view the first few rows of a data frame or first few elements of a vector/list, use `head()`. To view the last elements, use `tail()`. You can supply an optional second argument specifying the number of elements you want to see.  
 
-```{r}
+```
 head(iris, 3)
 ```
 
@@ -359,7 +359,7 @@ There are more advanced (and convenient, if you want to put time into learning) 
 
 For example, we can use `dplyr` to solve Exercise 3 with:
 
-```{r}
+```
 library(dplyr)
 iris %>%
   group_by(Species) %>%
@@ -373,7 +373,7 @@ iris %>%
 
 For loops are common in STAT 111. They allow you to run some code for every element in a collection. For example:
 
-```{r forloop_ex, eval = T}
+```
 my_vector <- c(110, 111, 139) # Numbers 1 through 10
 for (i in my_vector) {
   print(i %% 17)
@@ -384,15 +384,15 @@ for (i in my_vector) {
 
 For loops can be useful but are usually not the most efficient solution. For example, we could accomplish the same task as the example in 4.1 with a single vector operation.
 
-```{r}
+```
 my_vector %% 17
 ```
 
 ### 4.3 Replicate
 
-The function `replicate` repeatedly evaluates an expression. This is useful for simulations. For example, if our experiment was to observe 10 i.i.d. r.v.s with an Exponential distribution with $\lambda = 1$, we can replicate the experiment 100 times using the following:
+The function `replicate` repeatedly evaluates an expression. This is useful for simulations. For example, if our experiment was to observe 10 i.i.d. r.v.s with an Exponential distribution with \\(\lambda = 1 \\), we can replicate the experiment 100 times using the following:
 
-```{r replicate_ex, eval=F}
+```
 # run the code to see how simplify changes the result
 result <- replicate(100, rexp(10, 1), simplify = F)
 result <- replicate(100, rexp(10, 1), simplify = T)
@@ -402,13 +402,13 @@ result <- replicate(100, rexp(10, 1), simplify = T)
 
 Observe the CLT in action with simulations! 
 
-*Generate 500 trials of observing 5 i.i.d. Exponential r.v.s with $\lambda = 1$. Find the mean of each trial and plot the histogram of the sample means using hist(vector.name).*
+*Generate 500 trials of observing 5 i.i.d. Exponential r.v.s with \\(\lambda = 1 \\). Find the mean of each trial and plot the histogram of the sample means using hist(vector.name).*
 
 *Repeat the above with 50 and 1000 r.v.s (not replications).*
 
 Hint: Define a separate vector to store the means.
 
-```{r}
+```
 trial <- function() {
  x <- rexp(50, 1)
  mean(x)
@@ -424,7 +424,7 @@ hist(result)
 
 Replication is most useful when combined with custom functions. We can define a function to find the element with the highest magnitude in a vector like so:
 
-```{r}
+```
 # We can set default values to arguments in functions, like na.rm here
 max_magnitude <- function(vec, na.rm = T) {
   max(abs(vec), na.rm = na.rm)
@@ -436,7 +436,7 @@ max_magnitude(c(NA, -50, 51, -61, 121, -124))
 
 R uses fairly intuitive control flow with notation for `if`, `else if`, and `else`. Additionally, a value of 0 evaluates to `FALSE` and any other value evaluates to `TRUE`.
 
-```{r control_flow}
+```
 for (i in 1:5) {
   if (i %% 2) {
     message(i, " is odd")
@@ -458,7 +458,7 @@ R has base functions for plotting, but I personally dislike them. Instead, we'll
 
 ### 6.1 Creating a scatterplot
 
-```{r, eval = T}
+```
 # install ggplot2 if you haven't already
 # install.packages(ggplot2)
 library(ggplot2)
@@ -481,9 +481,9 @@ ggplot(data = df, aes(x = predictor, y = response)) +
 
 ### 6.2 Creating a histogram
 
-We can generate 400 samples from an Exponential distribution with $\lambda = 1$ and see how the histogram compared to the known PDF of the distribution.
+We can generate 400 samples from an Exponential distribution with \\(\lambda = 1 \\) and see how the histogram compared to the known PDF of the distribution.
 
-```{r, eval = T}
+```
 # Generate samples of data
 expo_samp <- rexp(10000, 1)
 expo_samp_df <- data.frame(expo_samp)
@@ -505,7 +505,7 @@ ggplot(data = expo_samp_df, aes(x = expo_samp)) +
 
 If you're curious about how to do the same things using base R (without needing to install `ggplot2`) here's a brief summary. 
 
-```{r base_plot, eval = T}
+```
 # Make a scatter plot with the same data
 plot(
  predictor, 
@@ -524,41 +524,49 @@ hist(expo_samp, freq = F) +
 curve(dexp(x, 1), col = "red", add = T) 
 ```
 
-\newpage 
-
 ## Practice problems
 
 ### 1 Maximum likelihood estimator
 
 We're often concerned with finding the value of a parameter that maximizes the probability of observing the data that we did. This is called a *maximum likelihood estimate* or MLE. Let's use an example to visualize maximum likelihood. 
 
-#### 1.1
+#### 1.1 Generate data
 
-Create 20 random observations from a $\text{Pois}(3)$ r.v. Suppose we know that the data are i.i.d. $\text{Pois}$ observations but we don't know that $\lambda = 3$. For each $\lambda$ in $\{0.1, 0.2, 0.3, \dots, 4.9, 5\}$, find the likelihood of your data. I.e. for each $\lambda$, find $P(Y_1 = y_1, Y_2 = y_2, \dots, Y_{100} = y_{100} | \lambda)$. Save these likelihoods in some vector. 
+Create 20 random observations from a Poisson r.v. with rate parameter 3. Suppose we know that the data are i.i.d. Poisson observations but we don't know the rate parameter. 
 
-#### 1.2
+For each rate parameter from 0.01 to 5.00 (in 0.01 increments), find the likelihood of your data.
 
-Now, make a line plot of the $\lambda$s versus the likelihoods. What appears to be the value of $\lambda$ that maximizes the likelihood? 
+Save these likelihoods in some vector. 
+
+#### 1.2 Plot likelihood
+
+Now, make a line plot of the rate parameters versus the likelihoods. What appears to be the value of \\( \lambda \\) that maximizes the likelihood? 
 
 ### 2 Biased sample variance
 
-The sample variance of i.i.d. observations $X_1, \dots, X_n$ with true variance $\sigma^2$ is given by $\hat{\sigma}^2_{n-1} = \frac{1}{n-1}\sum_{i = 1}^n (X_i - \bar{X})^2$. $\hat{\sigma}^2$ is *unbiased* in that its expectation is the true variance, i.e. $E(\hat{\sigma}^2_{n-1}) = \sigma^2$. This problem shows that $\hat{\sigma}^2$ is unbiased while $\hat{\sigma}^2_n = \frac{1}{n}\sum_{i = 1}^n(X_i - \bar{X})^2$ is. 
+The sample variance of i.i.d. observations \\( X_1, \dots, X_n \\) with true variance \\( \sigma^2 \\) is given by 
+
+\\[
+\hat{\sigma}^2 = \frac{1}{n-1}\sum_{i = 1}^n (x_i - \bar{x})^2.
+\\]
+
+The estimator \\( \hat{\sigma}^2 \\) is *unbiased* in that its expectation is the true variance, i.e. \\( E(\hat{\sigma}^2) = \sigma^2 \\). This problem shows that \\( \hat{\sigma}^2 \\) is unbiased while the estimator determined by \\( \frac{1}{n}\sum_{i = 1}^n(X_i - \bar{X})^2 \\) is. 
 
 #### 2.1 
 
-Create a function that calculates $\hat{\sigma}^2_n$ for any vector of data.
+Create a function that calculates \\( \hat{\sigma}^2_n \\) for any vector of data.
 
 #### 2.2
 
-Using 1000 iterations, run a for loop that generates $n = 10$ independent observations from a Standard Normal r.v. and calculates $\hat{\sigma}^2_{n-1}$ and $\hat{\sigma}^2_n$. On average, which estimator is closer to the true value, $\sigma^2 = 1$.
+Using 1000 iterations, run a for loop that generates \\( n = 10 \\) independent observations from a Standard Normal r.v. and calculates \\( \hat{\sigma}^2_{n-1} \\) and \\( \hat{\sigma}^2_n \\). On average, which estimator is closer to the true value, \\( \sigma^2 = 1 \\).
 
 #### 2.3 (Challenge)
 
-Let's see how the bias of $\hat{\sigma}^2_n$ varies with the sample size $n$. Using $n = 2, 3, ..., 30$, do the following 100 times: generate $n$ independent observations from a Standard Normal and calculate $\hat{\sigma}^2_n$. Then plot $n$ vs. the average $\hat{\sigma}^2_n$ for each value $n$. (Note: we have two loops here: one for each size $n$ and one inner-loop that calculates 100 samples of size $n$ for each $n$).  
+Let's see how the bias of \\( \hat{\sigma}^2_n \\) varies with the sample size \\( n \\). Using \\( n = 2, 3, ..., 30 \\), do the following 100 times: generate \\( n \\) independent observations from a Standard Normal and calculate \\( \hat{\sigma}^2_n \\). Then plot \\( n \\) vs. the average \\( \hat{\sigma}^2_n \\) for each value \\( n \\). (Note: we have two loops here: one for each size \\( n \\) and one inner-loop that calculates 100 samples of size \\( n \\) for each \\( n \\)).  
 
 ### 3 Universality of the uniform
 
-Let's use the universality of the uniform to generate random observations from an Exponential distribution with rate parameter 1. Recall that $F_X(x) = 1-e^{-x}$ for $X \sim \text{Expo}(1)$. 
+Let's use the universality of the uniform to generate random observations from an Exponential distribution with rate parameter 1. Recall that \\( F_X(x) = 1-e^{-x} \\) for \\( X \sim \text{Expo}(1) \\). 
 
 #### 3.1
 
@@ -570,7 +578,7 @@ Now generate many draws from a uniform, plug them into the inverse-CDF, and plot
 
 #### 3.3 
 
-Now overlay the density of a $\text{Expo}(1)$ to your histogram. Does the observed data appear to match the theoretical distribution?
+Now overlay the density of a \\( \text{Expo}(1) \\) to your histogram. Does the observed data appear to match the theoretical distribution?
 
 ### 4 Linear regression
 
@@ -600,9 +608,9 @@ Make `X` into a matrix (hint: `as.matrix()`). Then, make a vector (which is just
 
 The following matrix operations should return the same coefficients as we found in 4.3. Check that this is the case
 
-$$
+\\[
 \left(\mathbf{X}^T\mathbf{X} \right)^{-1}\mathbf{X}^T\mathbf{y}.
-$$
+\\]
 
 \newpage
 
@@ -619,7 +627,7 @@ I've included some of the more important notes for STAT 111 here.
 
 The easiest way to go about this is useing the `tinytex` package to install TinyTeX. You can do this with
 
-```{r, eval = F}
+```
 # install.packages("tinytex")
 tinytex::install_tinytex()
 ```
