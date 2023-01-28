@@ -21,7 +21,7 @@
 title: Course Notes
 email: axin@college.harvard.edu
 description: >- # this means to ignore newlines until "baseurl:"
-  Resources for students in STAT111 (Spring 2023). Managed by aL Xin.
+  Resources for students in Stat 111 (Spring 2023). Managed by aL Xin.
 absolute_url: "/stat111-2023"
 relative_url: "/stat111-2023"
 # baseurl: "/stat111" # the subpath of your site, e.g. /blog
