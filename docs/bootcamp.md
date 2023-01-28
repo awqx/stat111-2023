@@ -682,15 +682,50 @@ Let's use the universality of the uniform to generate random observations from a
 
 #### 3.1
 
-U of U says that if we plug a uniform into the inverse-CDF, we will observe draws from the desired distribution. First find the inverse CDF analytically (the function of the inverse CDF).
+U of U says that if we plug a uniform into the inverse-CDF, we will observe draws from the desired distribution. First find the inverse CDF analytically (the function of the inverse CDF) and write them into a function.
+
+**Solution**: The default base of the `log` function in R is the natural log. 
+
+```
+invcdf <- function(x) -log(1 - x)
+```
 
 #### 3.2
 
-Now generate many draws from a uniform, plug them into the inverse-CDF, and plot them using a histogram.
+Now generate 10 000 draws from a uniform, plug them into the inverse-CDF, and plot them using a histogram.
+
+**Solution**: 
+
+```
+x <- invcdf(runif(10000)) %>%
+	data.frame(x = .) # names the column
+
+ggplot(x, aes(x = x)) + 
+	geom_histogram()
+```
+
+![Histogram of uniform draws after being put into the inverse Exponential CDF.](assets/images/r_bootcamp/q3_2.png)
 
 #### 3.3 
 
 Now overlay the density of a \\( \text{Expo}(1) \\) to your histogram. Does the observed data appear to match the theoretical distribution?
+
+**Solution**: We can use the additional argument `aes(y = ..density)` in the call to `geom_histogram` to get a density plot. 
+
+To plot the line of the Exponential density, we create a data frame `expodf`. 
+
+```
+expodf <- data.frame(
+	x = seq(0, 10, 0.01), 
+	y = dexp(seq(0, 10, 0.01), 1)
+)
+
+ggplot(x, aes(x = x)) + 
+	geom_histogram(aes(y = ..density..)) + 
+	geom_line(data = expodf, aes(x = x, y = y), color = "red")
+```
+
+![Exponential density to validate Universality of the Uniform with the Exponential CDF.](assets/images/r_bootcamp/q3_3.png)
 
 ### 4 Linear regression
 
@@ -700,13 +735,35 @@ This problem explores *linear regression* using the `stats` package's `lm` comma
 
 Create a binary variable within `iris` for whether the species of each flower is `setosa` (i.e. it should be 1 if the flower is `setosa` and 0 otherwise). Call this variable `setosa`.
 
+**Solution**: This example demonstrates this operation in base R or with `dplyr`. 
+
+```
+iris$issetosa <- c(iris$Species == "setosa")
+# dplyr
+iris_dplyr <- iris %>%
+	mutate(issetosa = c(Species == "setosa"))
+```
+
 #### 4.2 
 
 Use the `lm` command to run a regression of `setosa` on all variables within `iris` except the `Species` variable. Save the model by the name `lm1`. (Note: you can use the documentation for `lm` for help. View it by entering `?lm` in the console).
 
+**Solution**: 
+
+```
+lm1 <- lm(issetosa ~ . - Species, iris)
+```
+
 #### 4.3 
 
 Find the "regression coefficients" by running `lm1$coefficients` or `coef(lm1)`.
+
+**Solution**: You should get the following result. 
+
+```
+ (Intercept) Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+  0.11822289   0.06602977   0.24284787  -0.22465712  -0.05747273
+```
 
 #### 4.4 
 
@@ -724,7 +781,26 @@ The following matrix operations should return the same coefficients as we found 
 \left(\mathbf{X}^T\mathbf{X} \right)^{-1}\mathbf{X}^T\mathbf{y}.
 \\]
 
-\newpage
+**Solution**:
+
+```
+iris_mat <- cbind(1, iris)
+iris_mat <- iris_mat[1:5] %>% as.matrix()
+x <- iris_mat
+
+solve(t(x) %*% x) %*% t(x) %*% as.matrix(iris$issetosa)
+```
+
+You should get the following result:
+
+```
+                    [,1]
+1             0.11822289
+Sepal.Length  0.06602977
+Sepal.Width   0.24284787
+Petal.Length -0.22465712
+Petal.Width  -0.05747273
+```
 
 ## Miscellaneous Advice
 

@@ -532,8 +532,8 @@ abline(10, 2, col = "red")
 
 # Make a histogram with the same data
 # To make a normal histogram, set freq = T
-hist(expo_samp, freq = F) + 
-curve(dexp(x, 1), col = "red", add = T) 
+hist(expo_samp, freq = F)
+curve(dexp, add = T) 
 ```
 
 \newpage 
@@ -676,7 +676,7 @@ Let's use the universality of the uniform to generate random observations from a
 
 U of U says that if we plug a uniform into the inverse-CDF, we will observe draws from the desired distribution. First find the inverse CDF analytically (the function of the inverse CDF).
 
-**Solution**:
+**Solution**: The default base of the `log` function in R is the natural log. 
 
 ```{r}
 invcdf <- function(x) -log(1 - x)
@@ -684,17 +684,37 @@ invcdf <- function(x) -log(1 - x)
 
 #### 3.2
 
-Now generate many draws from a uniform, plug them into the inverse-CDF, and plot them using a histogram.
+Now generate 10 000 draws from a uniform, plug them into the inverse-CDF, and plot them using a histogram.
 
 **Solution**: 
 
-```{r, q3_2}
+```{r q3_2}
+x <- invcdf(runif(10000)) %>%
+	data.frame(x = .) # names the column
 
+ggplot(x, aes(x = x)) + 
+	geom_histogram()
 ```
 
 #### 3.3 
 
 Now overlay the density of a $\text{Expo}(1)$ to your histogram. Does the observed data appear to match the theoretical distribution?
+
+**Solution**: We can use the additional argument `aes(y = ..density)` in the call to `geom_histogram` to get a density plot. 
+
+To plot the line of the Exponential density, we create a data frame `expodf`. 
+
+```{r q3_3}
+expodf <- data.frame(
+	x = seq(0, 10, 0.01), 
+	y = dexp(seq(0, 10, 0.01), 1)
+)
+
+ggplot(x, aes(x = x)) + 
+	geom_histogram(aes(y = ..density..)) + 
+	geom_line(data = expodf, aes(x = x, y = y), color = "red")
+```
+
 
 ### 4 Linear regression
 
@@ -703,6 +723,8 @@ This problem explores *linear regression* using the `stats` package's `lm` comma
 #### 4.1 
 
 Create a binary variable within `iris` for whether the species of each flower is `setosa` (i.e. it should be 1 if the flower is `setosa` and 0 otherwise). Call this variable `issetosa`.
+
+**Solution**: This example demonstrates this operation in base R or with `dplyr`. 
 
 ```{r}
 iris$issetosa <- c(iris$Species == "setosa")
@@ -716,6 +738,8 @@ iris_dplyr <- iris %>%
 
 Use the `lm` command to run a regression of `setosa` on all variables within `iris` except the `Species` variable. Save the model by the name `lm1`. (Note: you can use the documentation for `lm` for help. View it by entering `?lm` in the console).
 
+**Solution**: 
+
 ```{r}
 lm1 <- lm(issetosa ~ . - Species, iris)
 ```
@@ -723,6 +747,8 @@ lm1 <- lm(issetosa ~ . - Species, iris)
 #### 4.3 
 
 Find the "regression coefficients" by running `lm1$coefficients` or `coef(lm1)`.
+
+**Solution**
 
 ```{r}
 coef(lm1)
