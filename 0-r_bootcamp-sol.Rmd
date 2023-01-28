@@ -6,6 +6,9 @@ output: pdf_document
 ---
 
 ```{r setup, include = FALSE}
+library(ggplot2)
+library(dplyr)
+theme_set(theme_bw())
 knitr::opts_chunk$set(echo = T, eval = F)
 ```
 
@@ -14,6 +17,8 @@ I use Windows, so I may get some MacOS shortcuts wrong.
 To get the most mileage from this document, I suggest having both the R Markdown file open  alongside the PDF. By default, the chunks are set to not evaluate using `eval = F` (see the source). If you want to see results from each chunk, remove `eval = F` from the very first chunk in the source `.Rmd` file and recompile the document.
 
 If you have additional questions, email me at <axin@college.harvard.edu>. 
+
+Want to skip to practice problems? [Click here](#practice). 
 
 ## What is R Markdown?
 
@@ -533,7 +538,7 @@ curve(dexp(x, 1), col = "red", add = T)
 
 \newpage 
 
-## Practice problems
+## Practice problems {#practice}
 
 ### 1 Maximum likelihood estimator
 
@@ -541,17 +546,46 @@ We're often concerned with finding the value of a parameter that maximizes the p
 
 #### 1.1
 
-Create 20 random observations from a $\text{Pois}(3)$ r.v. Suppose we know that the data are i.i.d. $\text{Pois}$ observations but we don't know that $\lambda = 3$. For each $\lambda$ in $\{0.01, 0.02, 0.03, \dots, 4.99, 5\}$, find the likelihood of your data. I.e. for each $\lambda$, find $P(Y_1 = y_1, Y_2 = y_2, \dots, Y_{100} = y_{100} | \lambda)$. Save these likelihoods in some vector. 
+Create 20 random observations from a $\text{Pois}(3)$ r.v. Suppose we know that the data are i.i.d. $\text{Pois}$ observations but we don't know that $\lambda = 3$. (Consider: is this a realistic scenario?)
 
-**Solution**: It would help to know the 
+For each $\lambda$ in $\{0.01, 0.02, 0.03, \dots, 4.99, 5\}$, find the likelihood of your data. I.e. for each $\lambda$, find $P(Y_1 = y_1, Y_2 = y_2, \dots, Y_{100} = y_{100} | \lambda)$. Save these likelihoods in some vector. 
+
+**Solution**:
 
 ```{r q1_1}
-x <- rpois(20, 3)
+set.seed(111)
+x <- rpois(10000, 3)
+lambdavec <- seq(0.01, 5, 0.01)
+
+get_poislik <- function(xvec, lambda) sum(dpois(xvec, lambda))
+
+poislik <- sapply(
+	lambdavec, 
+	get_poislik, 
+	xvec = x
+)
 ```
 
 #### 1.2
 
-Now, make a line plot of the $\lambda$s versus the likelihoods. What appears to be the value of $\lambda$ that maximizes the likelihood? 
+Now, make a line plot of the $\lambda$s versus the likelihoods. What appears to be the value of $\lambda$ that maximizes the likelihood? Plot a vertical line at the peak of the likelihood. 
+
+**Solution**:
+
+```{r q1_2}
+# install.packages("ggplot2") # if you haven't already
+library(ggplot2)
+q12 <- data.frame(lambda = lambdavec, lik = poislik)
+
+ggplot(q12, aes(x = lambda, y = lik)) + 
+	geom_line() + 
+	geom_vline(xintercept = lambdavec[which.max(poislik)], color = "red") + 
+	theme_bw() + 
+	labs(
+		x = "Lambda candidate values", 
+		y = "Log-likelihood"
+	)
+```
 
 ### 2 Biased sample variance
 
@@ -561,13 +595,78 @@ The sample variance of i.i.d. observations $X_1, \dots, X_n$ with true variance 
 
 Create a function that calculates $\hat{\sigma}^2_n$ for any vector of data.
 
+**Solution**:
+
+```{r q2_1}
+var_new <- function(x) var(x) * (length(x) - 1) / length(x)
+```
+
 #### 2.2
 
-Using 1000 iterations, run a for loop that generates $n = 10$ independent observations from a Standard Normal r.v. and calculates $\hat{\sigma}^2_{n-1}$ and $\hat{\sigma}^2_n$. On average, which estimator is closer to the true value, $\sigma^2 = 1$.
+Using 10000 iterations, run a for loop that generates $n = 10$ independent observations from a Standard Normal r.v. and calculates $\hat{\sigma}^2_{n-1}$ and $\hat{\sigma}^2_n$. On average, which estimator is closer to the true value, $\sigma^2 = 1$?
+
+**Solution**: We can print a result that will be knitted in the PDF using the `cat` function to concatenate text and output. 
+
+Note that we're taking the matrix result of `replicate` and converting it to a `data.frame` to use `sapply`. 
+
+```{r q2_2}
+q22 <- data.frame(replicate(10000, rnorm(10)))
+sigma_n1 <- sapply(q22, var)
+sigma_n <- sapply(q22, var_new)
+
+cat(
+	"n:", mean(sigma_n - 1), "\n", 
+	"n - 1:", mean(sigma_n1 - 1)
+)
+```
 
 #### 2.3 (Challenge)
 
-Let's see how the bias of $\hat{\sigma}^2_n$ varies with the sample size $n$. Using $n = 2, 3, ..., 30$, do the following 100 times: generate $n$ independent observations from a Standard Normal and calculate $\hat{\sigma}^2_n$. Then plot $n$ vs. the average $\hat{\sigma}^2_n$ for each value $n$. (Note: we have two loops here: one for each size $n$ and one inner-loop that calculates 100 samples of size $n$ for each $n$).  
+Let's see how the bias of $\hat{\sigma}^2_n$ varies with the sample size $n$. Using $n = 2, 3, ..., 30$, do the following 100 times: generate $n$ independent observations from a Standard Normal and calculate $\hat{\sigma}^2_n$. Then plot $n$ vs. the average $\hat{\sigma}^2_n - \sigma^2$ for each value $n$. (Note: we have two loops here: one for each size $n$ and one inner-loop that calculates 100 samples of size $n$ for each $n$). 
+
+**Solution**: Note that our inner loop is our solution from 2.2. So, let's convert that into a function. This function will take the argument for the number of observations in the sample. 
+
+Notice how the pipe operator `%>%` is used to send the output of a function to another function. This is clearer and requires less reassigning of variables. 
+
+```{r q2_3}
+library(dplyr) # gives us the pipe "%>%"
+nsamp <- c(2:30)
+get_n <- function(nsamp) {
+	temp <- replicate(10000, rnorm(nsamp)) %>%
+		data.frame() %>%
+		sapply(var_new)
+	mean(temp - 1)
+} 
+q2_3 <- data.frame(nsamp, bias = sapply(nsamp, get_n))
+ggplot(q2_3, aes(x = nsamp, y = bias)) + 
+	geom_line() + 
+	labs(
+		x = "Number in sample", 
+		y = "Bias of variance estimator"
+	)
+```
+
+As a bonus, we can also do the same calculations for the unbiased estimator and compare them. This code shows one of several ways you could combine the two lines on one graph. 
+
+```{r q2_3b}
+get_n1 <- function(nsamp) {
+	temp <- replicate(10000, rnorm(nsamp)) %>%
+		data.frame() %>%
+		sapply(var)
+	mean(temp - 1)
+} 
+q2_3b <- data.frame(nsamp, bias = sapply(nsamp, get_n1)) %>%
+	mutate(estimator = "unbiased")
+q2_3 <- mutate(q2_3, estimator = "biased")
+q2_3c <- rbind(q2_3b, q2_3)
+ggplot(q2_3c, aes(x = nsamp, y = bias, color = estimator)) + 
+	geom_line() + 
+	labs(
+		x = "Number in sample", 
+		y = "Bias of variance estimator", 
+		color = "Variance estimator"
+	)
+```
 
 ### 3 Universality of the uniform
 
@@ -577,9 +676,21 @@ Let's use the universality of the uniform to generate random observations from a
 
 U of U says that if we plug a uniform into the inverse-CDF, we will observe draws from the desired distribution. First find the inverse CDF analytically (the function of the inverse CDF).
 
+**Solution**:
+
+```{r}
+invcdf <- function(x) -log(1 - x)
+```
+
 #### 3.2
 
 Now generate many draws from a uniform, plug them into the inverse-CDF, and plot them using a histogram.
+
+**Solution**: 
+
+```{r, q3_2}
+
+```
 
 #### 3.3 
 
@@ -591,15 +702,31 @@ This problem explores *linear regression* using the `stats` package's `lm` comma
 
 #### 4.1 
 
-Create a binary variable within `iris` for whether the species of each flower is `setosa` (i.e. it should be 1 if the flower is `setosa` and 0 otherwise). Call this variable `setosa`.
+Create a binary variable within `iris` for whether the species of each flower is `setosa` (i.e. it should be 1 if the flower is `setosa` and 0 otherwise). Call this variable `issetosa`.
+
+```{r}
+iris$issetosa <- c(iris$Species == "setosa")
+# dplyr
+iris_dplyr <- iris %>%
+	mutate(issetosa = c(Species == "setosa"))
+```
+
 
 #### 4.2 
 
 Use the `lm` command to run a regression of `setosa` on all variables within `iris` except the `Species` variable. Save the model by the name `lm1`. (Note: you can use the documentation for `lm` for help. View it by entering `?lm` in the console).
 
+```{r}
+lm1 <- lm(issetosa ~ . - Species, iris)
+```
+
 #### 4.3 
 
 Find the "regression coefficients" by running `lm1$coefficients` or `coef(lm1)`.
+
+```{r}
+coef(lm1)
+```
 
 #### 4.4 
 
@@ -617,7 +744,13 @@ $$
 \left(\mathbf{X}^T\mathbf{X} \right)^{-1}\mathbf{X}^T\mathbf{y}.
 $$
 
-\newpage
+```{r}
+iris_mat <- cbind(1, iris)
+iris_mat <- iris_mat[1:5] %>% as.matrix()
+x <- iris_mat
+
+solve(t(x) %*% x) %*% t(x) %*% as.matrix(iris$issetosa)
+```
 
 ## Miscellaneous Advice
 

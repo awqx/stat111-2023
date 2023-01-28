@@ -10,6 +10,8 @@ To get the most mileage from this document, I suggest having both the R Markdown
 
 If you have additional questions, email me at <axin@college.harvard.edu>. 
 
+Looking for the practice problems? [Click here](#practice). 
+
 ## What is R Markdown?
 
 R Markdown is a file format that integrates text editing and R code evaluation. Using R Markdown, you can create reports with formatted text, LaTeX and R. 
@@ -532,7 +534,7 @@ hist(expo_samp, freq = F) +
 curve(dexp(x, 1), col = "red", add = T) 
 ```
 
-## Practice problems
+## Practice problems {#practice}
 
 ### 1 Maximum likelihood estimator
 
@@ -540,15 +542,50 @@ We're often concerned with finding the value of a parameter that maximizes the p
 
 #### 1.1 Generate data
 
-Create 20 random observations from a Poisson r.v. with rate parameter 3. Suppose we know that the data are i.i.d. Poisson observations but we don't know the rate parameter. 
+Create 20 random observations from a Poisson r.v. with rate parameter 3. Suppose we know that the data are i.i.d. Poisson observations but we don't know the rate parameter. (Consider: is this a realistic scenario?)
 
 For each rate parameter from 0.01 to 5.00 (in 0.01 increments), find the likelihood of your data.
 
 Save these likelihoods in some vector. 
 
+**Solution**: 
+
+```
+set.seed(111)
+x <- rpois(10000, 3)
+lambdavec <- seq(0.01, 5, 0.01)
+
+get_poislik <- function(xvec, lambda) sum(dpois(xvec, lambda))
+
+poislik <- sapply(
+	lambdavec, 
+	get_poislik, 
+	xvec = x
+)
+```
+
 #### 1.2 Plot likelihood
 
-Now, make a line plot of the rate parameters versus the likelihoods. What appears to be the value of \\( \lambda \\) that maximizes the likelihood? 
+Now, make a line plot of the rate parameters versus the likelihoods. What appears to be the value of \\( \lambda \\) that maximizes the likelihood? Plot a vertical line at that rate parameter. 
+
+**Solution**: Note that we use `which.max` in order to grab the correct index of the maximum and then grab the correct value of our rate parameter. 
+
+```
+# install.packages("ggplot2") # if you haven't already
+library(ggplot2)
+q12 <- data.frame(lambda = lambdavec, lik = poislik)
+
+ggplot(q12, aes(x = lambda, y = lik)) + 
+	geom_line() + 
+	geom_vline(xintercept = lambdavec[which.max(poislik)], color = "red") + 
+	theme_bw() + 
+	labs(
+		x = "Lambda candidate values", 
+		y = "Log-likelihood"
+	)
+```
+
+![Plot of the log likelihood vs. various rate parameter candidates](/assets/images/r_bootcamp/q12.png)
 
 ### 2 Biased sample variance
 
@@ -564,13 +601,80 @@ The estimator \\( \hat{\sigma}^2 \\) is *unbiased* in that its expectation is th
 
 Create a function that calculates \\( \hat{\sigma}^2_n \\) for any vector of data.
 
+**Solution**:  Checking the documentation, we see that we can adapt the base R function `var` for our purposes. 
+
+```
+var_new <- function(x) var(x) * (length(x) - 1) / length(x)
+```
+
 #### 2.2
 
-Using 1000 iterations, run a for loop that generates \\( n = 10 \\) independent observations from a Standard Normal r.v. and calculates \\( \hat{\sigma}^2_{n-1} \\) and \\( \hat{\sigma}^2_n \\). On average, which estimator is closer to the true value, \\( \sigma^2 = 1 \\).
+Using 10 000 iterations, run a for loop that generates \\( n = 10 \\) independent observations from a Standard Normal r.v. and calculates \\( \hat{\sigma}^2_{n-1} \\) and \\( \hat{\sigma}^2_n \\). On average, which estimator is closer to the true value, \\( \sigma^2 = 1 \\).
+
+**Solution**: We can print a result that will be knitted in the PDF using the `cat` function to concatenate text and output. 
+
+Note that we're taking the matrix result of `replicate` and converting it to a `data.frame` to use `sapply`. 
+
+```
+q22 <- data.frame(replicate(10000, rnorm(10)))
+sigma_n1 <- sapply(q22, var)
+sigma_n <- sapply(q22, var_new)
+
+cat(
+	"n:", mean(sigma_n - 1), "\n", 
+	"n - 1:", mean(sigma_n1 - 1)
+)
+```
 
 #### 2.3 (Challenge)
 
-Let's see how the bias of \\( \hat{\sigma}^2_n \\) varies with the sample size \\( n \\). Using \\( n = 2, 3, ..., 30 \\), do the following 100 times: generate \\( n \\) independent observations from a Standard Normal and calculate \\( \hat{\sigma}^2_n \\). Then plot \\( n \\) vs. the average \\( \hat{\sigma}^2_n \\) for each value \\( n \\). (Note: we have two loops here: one for each size \\( n \\) and one inner-loop that calculates 100 samples of size \\( n \\) for each \\( n \\)).  
+Let's see how the bias of \\( \hat{\sigma}^2_n \\) varies with the sample size \\( n \\). Using \\( n = 2, 3, ..., 30 \\), do the following 100 times: generate \\( n \\) independent observations from a Standard Normal and calculate \\( \hat{\sigma}^2_n \\). Then plot \\( n \\) vs. the average \\( \hat{\sigma}^2_n - \sigma^2 \\) for each value \\( n \\). (Note: we have two loops here: one for each size \\( n \\) and one inner-loop that calculates 100 samples of size \\( n \\) for each \\( n \\)).  
+
+**Solution**:  
+
+```
+library(dplyr) # gives us the pipe "%>%"
+nsamp <- c(2:30)
+get_n <- function(nsamp) {
+	temp <- replicate(10000, rnorm(nsamp)) %>%
+		data.frame() %>%
+		sapply(var_new)
+	mean(temp - 1)
+} 
+q2_3 <- data.frame(nsamp, bias = sapply(nsamp, get_n))
+ggplot(q2_3, aes(x = nsamp, y = bias)) + 
+	geom_line() + 
+	labs(
+		x = "Number in sample", 
+		y = "Bias of variance estimator"
+	)
+```
+
+![Plot of the biased estimator](assets/images/r_bootcamp/q2_3.png)
+
+As a bonus, we can also do the same calculations for the unbiased estimator and compare them. This code shows one of several ways you could combine the two lines on one graph. 
+
+```
+get_n1 <- function(nsamp) {
+	temp <- replicate(10000, rnorm(nsamp)) %>%
+		data.frame() %>%
+		sapply(var)
+	mean(temp - 1)
+} 
+q2_3b <- data.frame(nsamp, bias = sapply(nsamp, get_n1)) %>%
+	mutate(estimator = "unbiased")
+q2_3 <- mutate(q2_3, estimator = "biased")
+q2_3c <- rbind(q2_3b, q2_3)
+ggplot(q2_3c, aes(x = nsamp, y = bias, color = estimator)) + 
+	geom_line() + 
+	labs(
+		x = "Number in sample", 
+		y = "Bias of variance estimator", 
+		color = "Variance estimator"
+	)
+```
+
+![Plot of the biased estimator vs. the unbiased estimator](assets/images/r_bootcamp/q2_3b.png)
 
 ### 3 Universality of the uniform
 
