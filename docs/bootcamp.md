@@ -198,11 +198,11 @@ To install R packages, use the function `install.packages()` with the package na
 R has built-in functions for working with many probability distributions covered in STAT 111. For any family of distributions in R (Binomial, Normal, etc.), there are four functions. For example, with Normal distributions, we have:
 
 - `dnorm(x, mean = mu, sd = sigma)`: Returns the probability density evaluated at `x` for a Normal distribution with mean `mu` and standard deviation `sigma`. Be careful to specify the standard deviation, *not* the variance.
-  - This is equivalent to \\( \phi((x - \mu)/\sigma) \\) 
+  - This is equivalent to $ \phi((x - \mu)/\sigma) $ 
 - `pnorm(q, mean = mu, sd = sigma)`: Returns the CDF evaluated at `q`.
-  - Equivalent to \\(\Phi((x - \mu)/\sigma) \\)
-- `qnorm(p, mu, sigma)`: Returns the value corresponding to \\(p \\)th quantile.
-- `rnorm(n, my, sigma)`: Returns \\(n \\) i.i.d. observations from the Normal r.v.
+  - Equivalent to $\Phi((x - \mu)/\sigma) $
+- `qnorm(p, mu, sigma)`: Returns the value corresponding to $p $th quantile.
+- `rnorm(n, my, sigma)`: Returns $n $ i.i.d. observations from the Normal r.v.
 
 The prefixes `d`, `p`, `q`, and `r` and the first arguments are consistent between probability distributions. However, different distributions require additional arguments to be specified. For example, to generate 10 i.i.d. observations with distribution `\text{Bin}(n, p)`, we would use the function call `rbinom(10, size = n, prob = p)`.
 
@@ -400,7 +400,7 @@ my_vector %% 17
 
 ### 4.3 Replicate
 
-The function `replicate` repeatedly evaluates an expression. This is useful for simulations. For example, if our experiment was to observe 10 i.i.d. r.v.s with an Exponential distribution with \\(\lambda = 1 \\), we can replicate the experiment 100 times using the following:
+The function `replicate` repeatedly evaluates an expression. This is useful for simulations. For example, if our experiment was to observe 10 i.i.d. r.v.s with an Exponential distribution with $\lambda = 1 $, we can replicate the experiment 100 times using the following:
 
 ```
 # run the code to see how simplify changes the result
@@ -412,7 +412,7 @@ result <- replicate(100, rexp(10, 1), simplify = T)
 
 Observe the CLT in action with simulations! 
 
-*Generate 500 trials of observing 5 i.i.d. Exponential r.v.s with \\(\lambda = 1 \\). Find the mean of each trial and plot the histogram of the sample means using hist(vector.name).*
+*Generate 500 trials of observing 5 i.i.d. Exponential r.v.s with $\lambda = 1 $. Find the mean of each trial and plot the histogram of the sample means using hist(vector.name).*
 
 *Repeat the above with 50 and 1000 r.v.s (not replications).*
 
@@ -491,7 +491,7 @@ ggplot(data = df, aes(x = predictor, y = response)) +
 
 ### 6.2 Creating a histogram
 
-We can generate 400 samples from an Exponential distribution with \\(\lambda = 1 \\) and see how the histogram compared to the known PDF of the distribution.
+We can generate 400 samples from an Exponential distribution with $\lambda = 1 $ and see how the histogram compared to the known PDF of the distribution.
 
 ```
 # Generate samples of data
@@ -566,7 +566,7 @@ poislik <- sapply(
 
 #### 1.2 Plot likelihood
 
-Now, make a line plot of the rate parameters versus the likelihoods. What appears to be the value of \\( \lambda \\) that maximizes the likelihood? Plot a vertical line at that rate parameter. 
+Now, make a line plot of the rate parameters versus the likelihoods. What appears to be the value of $ \lambda $ that maximizes the likelihood? Plot a vertical line at that rate parameter. 
 
 **Solution**: Note that we use `which.max` in order to grab the correct index of the maximum and then grab the correct value of our rate parameter. 
 
@@ -589,17 +589,17 @@ ggplot(q12, aes(x = lambda, y = lik)) +
 
 ### 2 Biased sample variance
 
-The sample variance of i.i.d. observations \\( X_1, \dots, X_n \\) with true variance \\( \sigma^2 \\) is given by 
+The sample variance of i.i.d. observations $ X_1, \dots, X_n $ with true variance $ \sigma^2 $ is given by 
 
 \\[
 \hat{\sigma}^2 = \frac{1}{n-1}\sum_{i = 1}^n (x_i - \bar{x})^2.
 \\]
 
-The estimator \\( \hat{\sigma}^2 \\) is *unbiased* in that its expectation is the true variance, i.e. \\( E(\hat{\sigma}^2) = \sigma^2 \\). This problem shows that \\( \hat{\sigma}^2 \\) is unbiased while the estimator determined by \\( \frac{1}{n}\sum_{i = 1}^n(X_i - \bar{X})^2 \\) is. 
+The estimator $ \hat{\sigma}^2 $ is *unbiased* in that its expectation is the true variance, i.e. $ E(\hat{\sigma}^2) = \sigma^2 $. This problem shows that $ \hat{\sigma}^2 $ is unbiased while the estimator determined by $ \frac{1}{n}\sum_{i = 1}^n(X_i - \bar{X})^2 $ is. 
 
 #### 2.1 
 
-Create a function that calculates \\( \hat{\sigma}^2_n \\) for any vector of data.
+Create a function that calculates $ \hat{\sigma}^2_n $ for any vector of data.
 
 **Solution**:  Checking the documentation, we see that we can adapt the base R function `var` for our purposes. 
 
@@ -609,7 +609,7 @@ var_new <- function(x) var(x) * (length(x) - 1) / length(x)
 
 #### 2.2
 
-Using 10 000 iterations, run a for loop that generates \\( n = 10 \\) independent observations from a Standard Normal r.v. and calculates \\( \hat{\sigma}^2_{n-1} \\) and \\( \hat{\sigma}^2_n \\). On average, which estimator is closer to the true value, \\( \sigma^2 = 1 \\).
+Using 10 000 iterations, run a for loop that generates $ n = 10 $ independent observations from a Standard Normal r.v. and calculates $ \hat{\sigma}^2_{n-1} $ and $ \hat{\sigma}^2_n $. On average, which estimator is closer to the true value, $ \sigma^2 = 1 $.
 
 **Solution**: We can print a result that will be knitted in the PDF using the `cat` function to concatenate text and output. 
 
@@ -628,7 +628,7 @@ cat(
 
 #### 2.3 (Challenge)
 
-Let's see how the bias of \\( \hat{\sigma}^2_n \\) varies with the sample size \\( n \\). Using \\( n = 2, 3, ..., 30 \\), do the following 100 times: generate \\( n \\) independent observations from a Standard Normal and calculate \\( \hat{\sigma}^2_n \\). Then plot \\( n \\) vs. the average \\( \hat{\sigma}^2_n - \sigma^2 \\) for each value \\( n \\). (Note: we have two loops here: one for each size \\( n \\) and one inner-loop that calculates 100 samples of size \\( n \\) for each \\( n \\)).  
+Let's see how the bias of $ \hat{\sigma}^2_n $ varies with the sample size $ n $. Using $ n = 2, 3, ..., 30 $, do the following 100 times: generate $ n $ independent observations from a Standard Normal and calculate $ \hat{\sigma}^2_n $. Then plot $ n $ vs. the average $ \hat{\sigma}^2_n - \sigma^2 $ for each value $ n $. (Note: we have two loops here: one for each size $ n $ and one inner-loop that calculates 100 samples of size $ n $ for each $ n $).  
 
 **Solution**:  
 
@@ -678,7 +678,7 @@ ggplot(q2_3c, aes(x = nsamp, y = bias, color = estimator)) +
 
 ### 3 Universality of the uniform
 
-Let's use the universality of the uniform to generate random observations from an Exponential distribution with rate parameter 1. Recall that \\( F_X(x) = 1-e^{-x} \\) for \\( X \sim \text{Expo}(1) \\). 
+Let's use the universality of the uniform to generate random observations from an Exponential distribution with rate parameter 1. Recall that $ F_X(x) = 1-e^{-x} $ for $ X \sim \text{Expo}(1) $. 
 
 #### 3.1
 
@@ -708,7 +708,7 @@ ggplot(x, aes(x = x)) +
 
 #### 3.3 
 
-Now overlay the density of a \\( \text{Expo}(1) \\) to your histogram. Does the observed data appear to match the theoretical distribution?
+Now overlay the density of a $ \text{Expo}(1) $ to your histogram. Does the observed data appear to match the theoretical distribution?
 
 **Solution**: We can use the additional argument `aes(y = ..density)` in the call to `geom_histogram` to get a density plot. 
 

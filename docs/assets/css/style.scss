@@ -63,8 +63,42 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--stat111blue);
   font-family: Roboto Mono, Consolas, monospace; 
   weight: normal; 
+  margin-bottom: 0.2em; 
+  margin-top: 0.5em; 
 }
 
 a, a:hover, a:visited {
   color: var(--stat111lightblue); 
+}
+
+
+section {
+  width: 600px; 
+}
+
+.wrapper {
+  width: 960px; 
+}
+
+@media print, screen and (max-width: 980px) {
+	.wrapper {
+	  width: auto;
+	  margin: 0;
+	}
+	
+	section {
+	  border: 1px solid #e5e5e5;
+		border-top-width: 1px;
+		border-right-width: 1px;
+		border-bottom-width: 1px;
+		border-left-width: 1px;
+	  border-width: 1px 0;
+	  padding: 20px 0;
+	  margin: 0 0 20px;
+	  width: auto; 
+	}
+}
+
+ul {
+    margin: 0;
 }

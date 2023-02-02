@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Course Notes
+title: Stat 111
 email: axin@college.harvard.edu
 description: >- # this means to ignore newlines until "baseurl:"
   Resources for students in Stat 111 (Spring 2023). Managed by aL Xin.

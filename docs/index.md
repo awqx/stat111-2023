@@ -20,7 +20,7 @@ My office hours will be held right after section on Thursdays, 4:30-6:30 PM, in 
 
 Yes.
 
-### Help! I have a specific question and I can't make it to in-person section or office hours. 
+### Help! I can't make it to in-person section or office hours. 
 
 First, try posting on [Ed](https://edstem.org/us/courses/32950/discussion/). Make the question *private* if it involves your personal work that would violate the Honor Code if shared for every student. Make the question *public* if it's a general clarifying question, including questions about how a problem is worded/expectations of work, content covered in lecture or the textbook, or course guidelines. 
 
