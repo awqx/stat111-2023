@@ -179,8 +179,10 @@ Problem 1 is sourced from Patrick Dickinson, COL 2022. Problems 2 and 3 are past
 
 ### Problem 1 (True/False questions)
 1. There exists an estimator $\hat\theta$ for which $\textrm{MSE}(\hat\theta) = (\textrm{Bias}(\hat\theta))^2$
-2. The sample mean is unbiased under all models where a mean exists
-3. When data comes from a discrete distribution, the likelihood function is also discrete. 
+2. If $\hat\theta$ is unbiased, then all other estimators are biased. 
+3. The sample mean is unbiased under all models where a mean exists.
+4. The squared error loss of an estimator for its estimand is a random variable. 
+5. When data comes from a discrete distribution, the likelihood function is also discrete. 
 
 ### Problem 2 (Medical testing)
 This problem will be a review of conditioning
