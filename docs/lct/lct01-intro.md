@@ -1,5 +1,9 @@
-# Lecture 01: Introduction
-*2023 Jan 23*.
+---
+layout: post
+title: Lecture 01 - Intro (incomplete)
+date: 2023-01-24
+lecture: 1
+---
 
 Any personal comments from aL are marked as such
 

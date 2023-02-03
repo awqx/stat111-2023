@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Lecture 03 - Maximum likelihood estimation
-date: 2023-02-01
+title: Lecture 03 - Maximum likelihood estimation (incomplete)
+date: 2023-01-31
 lecture: 3
 ---
 ## Censored data

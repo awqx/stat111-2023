@@ -4,9 +4,9 @@ title: Lectures
 rank: 2
 ---
 ## Lecture Notes
+I'll occasionally add personal notes into the lecture notes. 
 
 Available lecture notes:
-
 <ul>
   {% for lct in site.pages %}
     {% if lct.lecture  %}
@@ -16,5 +16,3 @@ Available lecture notes:
   {% endif %}
   {% endfor %}
 </ul>
-
-Solutions will be posted by EOD the section is taught. 

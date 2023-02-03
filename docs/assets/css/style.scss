@@ -56,7 +56,7 @@ code, .highlight {
 body, strong {
   font-family: Rubik Light, Roboto Light, Segoe UI, sans-serif; 
   color: var(--white); 
-  font-size: 11pt; 
+  font-size: 12pt; 
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -101,4 +101,9 @@ section {
 
 ul {
     margin: 0;
+}
+
+p {
+  margin-bottom: 0.5em; 
+  margin-top: 0.2em; 
 }
