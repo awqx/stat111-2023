@@ -41,20 +41,26 @@ We are trying to estimate what proportion of the Harvard body (staff, grad stude
 Likelihood function:
 
 $$
-L(p|\vec{x}) = \prod_{j = 1}^n p^{x_j} (1 - p)^{1 - x_j} = p^{k} (1 - p)^{n - k}, 
+L(p \mid \vec{x}) = \prod_{j = 1}^n p^{x_j} (1 - p)^{1 - x_j} = p^{k} (1 - p)^{n - k}, 
 $$
+
 where $k$ is $\sum_{j = 1}^n x_j$.
 
 Log-likelihood:
 
+
 $$
-\ell(p|\vec{x}) = k \ln p + (n - k) \ln (1 - p)
+\ell(p \mid \vec{x}) = k \ln p + (n - k) \ln (1 - p)
 $$
+
 MLE after setting the derivative of the above to 0:
 
 $$
-\frac{\partial \ell(p|\vec{X})}{\partial p} = \frac{k}{p} + \frac{k - n}{1 - p} = 0
+\frac{\partial \ell(p \mid \vec{X})}{\partial p} = \frac{k}{p} + \frac{k - n}{1 - p} = 0
 $$
+
+We can then solve for $p$ to get the MLE
+
 $$
 -k + pk = pk - np  \to \hat p = \frac{k}{n}, \; k = \sum_{j = 1}^n X_j.
 $$
@@ -71,12 +77,13 @@ Note that we can observe this is a maximum because of the second partial derivat
 Calculate the probability someone tests positive $P(T)$ with the probability that someone has the disease, $P(D)$.
 
 $$
-P(T) = P(T|D)P(D) + P(T|D^c)P(D^c) = ap + (1 - b)(1 - p) = 1 + p(a + b - 1) - b.
+P(T) = P(T \mid D)P(D) + P(T \mid D^c)P(D^c) = ap + (1 - b)(1 - p) = 1 + p(a + b - 1) - b.
 $$
+
 Replace $p$ in the likelihood function with $P(T)$. 
 
 $$
-L(p|\vec{x}) = (1 + p(a + b - 1) - b)^k(b - p(a + b - 1))^{n - k}.
+L(p \mid \vec{x}) = (1 + p(a + b - 1) - b)^k(b - p(a + b - 1))^{n - k}.
 $$
 
 ## Problem 3 (DNA sequence) {#dna}
@@ -92,15 +99,19 @@ CTACCTTCAATTGCTGGAACG
 > Write the log-likelihood of $\theta$.
 
 Let $W_x$ be the count of base-pairs with outcome $x$. We have that 
+
 $$
 (W_a, W_c, W_g, W_t) \sim \textrm{Multinomial}(n, \theta).
 $$
 
-We have the following likelihood and log-likelihood expressions given observations $w_x$ (and $x \in \{a, c, g, t\}$):
+We have the following expressions given observations $w_x$ (and $x \in \{a, c, g, t\}$):
 
 $$
 L(\theta) = \prod_{i = 1}^n \prod_{x} p_x^{I_{x_i = x}} = \prod_{x} p_x^{w_x},
 $$
+
+and log-likelihood
+
 $$
 \ell(\theta) = \sum_{x} w_x \log p_x.
 $$
@@ -124,22 +135,26 @@ Only 12 because the last entry in a row is determined by the previous three (or,
 > Assume that the marginal distribution $\textrm{Pr}(X_1 = x), x \in \{t, c, g, a\}$ is known. Write the log-likelihood of this model.
 
 The joint likelihood of the data (stored in $\vec{x}$)
-$$
-f_{\vec{X}} (\vec{x}|T) = f(x_1|T) \prod_{i = 2}^{10} f(x_t| x_{t = 1}, T) = P(X_1 = x_1|T) \prod_{i = 2}^{10} P(X_i = x_i | X_{i = 1} = x_{i = 1}, T)
-$$
-where we have
 
 $$
-P(X_i = y|X_{i = 1} = x, T) = \tau_{xy}.
+f_{\vec{X}} (\vec{x} \mid T) = f(x_1 \mid T) \prod_{i = 2}^{10} f(x_t \mid  x_{t = 1}, T) = P(X_1 = x_1 \mid T) \prod_{i = 2}^{10} P(X_i = x_i  \mid  X_{i = 1} = x_{i = 1}, T)
 $$
-Recall that we assume we know $f(x_1|T) = P(X_1 = x_1|T)$.
+
+where we have
+
+
+$$
+P(X_i = y \mid X_{i = 1} = x, T) = \tau_{xy}.
+$$
+
+Recall that we assume we know $f(x_1 \mid T) = P(X_1 = x_1 \mid T)$.
 
 Let $W_{xy}$ be the number of observations where the base pair $x$ is followed by $y$. 
 
 We then have the log-likelihood
 
 $$
-\ell(T|\vec{x}) = \sum_{x, y} w_{xy} \log \tau_{xy}: x, y = a, c, g, t.
+\ell(T \mid \vec{x}) = \sum_{x, y} w_{xy} \log \tau_{xy}: x, y = a, c, g, t.
 $$
 
 This is constrained so that each row of $T$ sums to 1. 
@@ -207,6 +222,7 @@ $$
 
 Observe that if we follow the hint, we have
 
+
 $$
 \ell(\mu, \sigma^2)
 = 
@@ -222,6 +238,7 @@ e^{-Y_j^2 / 2} +
 e^{-(Y_j - \mu)^2 / (2 \sigma^2)}
 \right).
 $$
+
 By sending $\sigma$ toward zero, notice the LH term becomes arbitrarily large. We also see
 
 $$
@@ -249,10 +266,12 @@ For an intuition of this, we can think of how the PDF of the Normal changes when
 > Why would we not achieve arbitrarily large likelihood using the same technique if the model were $Y_i \overset{\text{i.i.d.}}{\sim} \mathcal N(\mu, \sigma^2)$?
 
 If we look at the log-likelihood of a non-mixture Gaussian, we have
+
 $$
 \ell(\mu, \sigma^2) = 
 -\frac{1}{2\sigma^2}
 \sum_{j = 1}^n
 (Y_j - \mu)^2,
 $$
-so we see that taking an arbitrarily low $\sigma^2 will lower the likelihood. 
+
+so we see that taking an arbitrarily low $\sigma^2$ will lower the likelihood. 
