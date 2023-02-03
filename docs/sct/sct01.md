@@ -4,6 +4,8 @@ title: Section 01
 date: 2023-02-02
 section: 1
 ---
+[See solutions here](sct01-sol)
+
 ## Table of contents
 - [Stat 110 review](#stat110)
 - [Stat 111 basics](#basics)
@@ -246,7 +248,7 @@ Emily's mom prefers the method of moments. Using the first and second moments re
 
 #### (c) MSE
 For any estimators that disagree, determine whether Emily or Mom gave the estimator with lower MSE? Can you determine this without actually computing the MSE?
-- 
+
 ### Problem 4 (Gaussian mixture model)
 Suppose $Y_1, \dots, Y_n$ are drawn i.i.d. from a Gaussian mixture model, with $n > 1$. In particular, the data come from a standard Normal distribution with probability $\frac{1}{2}$ and otherwise come from a Normal distribution with unknown mean and variance, $\mu \in \mathbb R$ and $\sigma^2 > 0$ respectively.
 

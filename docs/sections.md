@@ -5,10 +5,13 @@ rank: 1
 ---
 ## Sections
 
+Section solutions will be posted by EOD Friday. 
+
 Available section notes:
 
 <ul>
-  {% for sct in site.pages %}
+  {% assign section = site.pages | sort:"gallery" | reverse %}
+  {% for sct in section %}
     {% if sct.section  %}
   <li>
     <a href="{{ sct.path | replace:'.md','.html' }}">{{ sct.title }}</a>. <em>{{ sct.date | date_to_string }}</em>.
@@ -16,5 +19,3 @@ Available section notes:
   {% endif %}
   {% endfor %}
 </ul>
-
-Solutions will be posted by EOD the section is taught. 
