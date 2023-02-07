@@ -73,8 +73,8 @@ which may be preferable to use the PDF $\phi$ or CDF $\Phi$ of the standard Norm
 	- This may trigger mathematicians
 	- Statisticians stay winning, though
 	- For typical examples in the real world
-		- BAD THINGS may happen for distributions with heavy tails
-		- Though all eventually fall to the might of the CLT
+		- BAD THINGS may happen for distributions with heavy tails (e.g., Cauchy)
+		- Though most cases eventually fall to the might of the CLT
 
 We can also use the statement
 
@@ -119,10 +119,11 @@ We can see in the approximate distributions that $M_n$ has higher variance (but 
 	- No mean
 	- Sample median is more robust against this case
 		- Sample mean has indeterminate 
+	- Exercise: prove that the mean of $n$ Cauchys is distributed Cauchy, not Normal
 
 ### Forms of convergence
 - Convergence... (in descending order of strength)
-	- Almost surely (not mentioned in this class)
+	- Almost surely (not covered in this lecture)
 	- In probability
 	- In distribution
 
