@@ -34,4 +34,3 @@ Any personal comments from aL are marked as such
 - Chapters 1-3 of the Stat 111 draft book are online
 	- Roughly 1 homework per chapter
 - Not as many practice exams for midterm/final due to changing course structure
-- 
