@@ -25,7 +25,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 absolute_url: "/stat111-2023"
 relative_url: "/stat111-2023"
 # baseurl: "/stat111" # the subpath of your site, e.g. /blog
-url: "https://awqx.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://awqx.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: al_xin
 github_username:  awqx
 logo: img/stat111-logo.png
