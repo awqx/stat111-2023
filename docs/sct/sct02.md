@@ -18,7 +18,7 @@ section: 2
 
 1. $X_n + Y_n \overset{d}{\to} X + c$
 2. $X_n Y_n \overset{d}{\to} cX$
-3. $X_n / Y_n \overset{d}{\to} X / c$ for $c \neq 0$
+2. $X_n / Y_n \overset{d}{\to} X / c$ for $c \neq 0$
 
 - What if the sequences both converge in distribution?
 - What if both sequences converge in probability?
@@ -155,46 +155,7 @@ $$
 	- Why does this make sense?
 
 # Problems {#qs}
-## 1 Volcanic eruption times
-Suppose that the times of major volcanic eruptions in the world follow a Poisson process of rate $\lambda$ eruptions per year. Let $\mu = 1/\lambda$. A volcanologist wishes to estimate $\lambda$ and $\mu$.
-
-### 1.1 Likelihood of $\lambda$
-
-The volcanologist collects data on the major volcanic eruptions in a pre-specified time interval $[0,t]$, where time $0$ is the first instant of the $20$th century and $t$ is fixed and known. Let $N$ be the number of eruptions in this time interval. Find the likelihood function for $\lambda$ based on observing $N=n$.
-
-### 1.2 Likelihood using time
-
-In the previous part we based our likelihood function on the one-dimensional statistic $N$, but in fact the data are richer: the volcanologist knows all the *times* of the eruptions in $[0,t]$. For this part, consider the data as including not only $n$, but also $t_1,\dots,t_n$, where $t_j$ is the time of the $j$th eruption and $0 < t_1<t_2<\dots<t_n<t$. Find the likelihood function for $\lambda$ based on these data. Is it equivalent to the likelihood from (a)?
-
-Hint: Recall from Stat 110 that the random variables that give rise to the interarrival times $x_1 = t_1, x_2 = t_2 -t_1, x_3 = t_3 - t_2, \dots, x_n = t_n - t_{n-1}$ are i.i.d. $Expo(\lambda)$. Explain why it is equivalent to work in terms of $(x_1,\dots,x_n)$ rather than $(t_1,\dots,t_n)$. Then write down the likelihood function based on  $(x_1,\dots,x_n)$, with one additional factor to account for the fact that we also know there were no eruptions between $t_n$ and $t$. 
-
-### 1.3 MLE
-
-Find the MLE $\hat{\lambda}$ of $\lambda$ and its bias, variance, and MSE. 
-
-### 1.4 Fisher information
-
-#### 1.4.1 Fisher information for $\lambda$
-
-Find the Fisher information $I(\lambda)$ for $\lambda$. 
-
-#### 1.4.2 Fisher information for $\mu$
-
-Find the Fisher information $I(\mu)$ for $\mu$. 
-
-### 1.5 MLE
-
-Find the MLE $\hat{\mu}$ of $\mu$. Unfortunately, it has a defect that makes it disastrously bad with positive probability and makes the MSE infinite. What is this defect?
-
-### 1.6 Patching the MLE
-
-To patch the issue from Problem 1.5, consider the following estimator for $\mu$:
-
-$$\tilde{\mu} = \frac{t}{N+1}.$$
-
-Find the bias of $\tilde{\mu}$ (with a mathematical derivation, not using R or Wolfram Alpha). 
-
-## 2 Typo searching
+## 1 Typo searching
 
 Let $Y_j$ be the number of typos on page $j$ of a certain book, and suppose that the $Y_j$ are i.i.d. $Pois(\lambda)$, with $\lambda$ unknown. Let
 
@@ -202,68 +163,68 @@ $$\theta = P(Y_j \geq 1 \mid  \lambda),$$
 
 the probability of a page having at least one typo. The first $n$ pages of the book are proofread extremely carefully, so $Y_1,\dots,Y_n$ are observed. 
 
-### 2.1 MLE
+### 1.1 MLE
 
 Find the MLE $\hat{\lambda}$ of $\lambda$.
 
-### 2.2 Approximate distribution
+### 1.2 Approximate distribution
 
 Show that $\hat{\lambda}$ is approximately Normal for $n$ large, and give the parameters. 
 
-### 2.3 MLE
+### 1.3 MLE
 
 Find the MLE $\hat{\theta}$ of $\theta$. 
 
-### 2.4 Distribution of $\hat\theta$
+### 1.4 Distribution of $\hat\theta$
 
 Find the distribution of $\hat\theta$ in three different ways: 
 
-#### 2.4.1 Fisher information 
+#### 1.4.1 Fisher information 
 
 Use Fisher information and the result about the asymptotic distribution of the MLE.
  
-#### 2.4.2 Delta method
+#### 1.4.2 Delta method
  
-#### 2.4.3 Simulation
+#### 1.4.3 Simulation
 
 Use simulation for the case where $n=10$ and the true value is $\lambda^* = 1$, performing at least $10^4$ replications.
  
-#### 2.4.4 Compare
+#### 1.4.4 Compare
 
 Compare the results of the three approaches above: how similar or different are they? If they differ substantially, which do you trust the most? 
 
-#### 2.4.5 Discuss
+#### 1.4.5 Discuss
 
 Discuss the relative advantages and disadvantages of the three approaches above (e.g., in terms of accuracy, generality, and ease of computation). 
 
-## 3 Score and Fisher info of Uniform
+## 2 Score and Fisher info of Uniform
 
 Suppose we have $X_1,\cdots, X_n \overset{i.i.d.}{\to} \textrm{Unif}(0,\theta), \theta >0$.
 
-### 3.1 Finding the score
+### 2.1 Finding the score
 
 Let $n=1$, write down score function $s(\theta; x)$. Find $E[s(\theta^\ast; X_1)]$, where $\theta^\ast$ is the true parameter.
 
-### 3.2 Checking properties of score
+### 2.2 Checking properties of score
 
 With $n=1$, find $\mathbb{E}\left[(s(\theta^\ast; X_1))^2\right]$, $\textrm{Var}(s(\theta^\ast; X_1))$, and $-\mathbb{E}\left[\frac{\partial s(\theta^\ast; X_1)}{\partial \theta^\ast}\right]$. Are they equal? Can you explain this?
 
-### 3.3 Fisher w/o regularity
+### 2.3 Fisher w/o regularity
 
 In fact, when the regularity conditions does not hold, we re-define Fisher information as $\mathcal{I}_{\mathbf{X}}(\theta^\ast)=E[(s(\theta^\ast; \mathbf{X}))^2]$. Find  $\mathcal{I}_{X_1}(\theta^\ast)$ in this setting.
 
-### 3.3 More Fisher
+### 2.3 More Fisher
 
 From this part, consider a general $n>0$. Find $\mathcal{I}_{\mathbf{X}}(\theta^\ast)$.
 
-### 3.4 MLE
+### 2.4 MLE
 
 Let $\hat{\theta}$ be the MLE for $\theta$. For a constant $\epsilon>0$, find $\Pr(\theta-\hat{\theta}>\epsilon)$ and use this to prove the consistency of $\hat{\theta}$.
 
-### 3.5 Bias
+### 2.5 Bias
 
 Show that the MLE is biased ("story proof" is fine). Propose an unbiased estimator of $\theta$ in the form of $c\hat{\theta}$, where $c$ is constant. What is the variance of this estimator?
 
-### 3.6 Variance of (3.5)
+### 2.6 Variance of (2.5)
 
-How does the variance of your estimator in 3.5 compare to the inverse of Fisher information?
+How does the variance of your estimator in 2.5 compare to the inverse of Fisher information?
