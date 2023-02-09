@@ -10,7 +10,7 @@ Section solutions will be posted by EOD Friday.
 Available section notes:
 
 <ul>
-  {% assign section = site.pages | sort:"gallery" | reverse %}
+  {% assign section = site.pages | sort:"gallery" %}
   {% for sct in section %}
     {% if sct.section  %}
   <li>
