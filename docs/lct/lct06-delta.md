@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lecture 06
+title: Lecture 06 - Delta method, MLE properties
 date: 2023-02-09
 lecture: 6
 ---
@@ -41,7 +41,7 @@ $$
 ## Delta method
 - Last tool for asymptotics
 - Name is not intuitive
-	- It's a theorem, not a method...
+	- It's a theorem, not a method
 
 **Thm** (Delta method). Let $g$ be a differentiable function. Suppose $\sqrt{n} (T_n - \theta) \overset{d}{\to} \mathcal{N}(0, \sigma^2)$, where $T_n$ is an r.v. and $\theta$ is a constant. Then, 
 
