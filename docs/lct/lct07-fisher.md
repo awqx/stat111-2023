@@ -21,7 +21,7 @@ $$
 	- Lost 200 games in a row without winning
 	- How do we estimate $\Pr(\textrm{Win})$?
 
-<img src="{{site.url}}/img/quantum_hoops.jpg" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/awqx/stat111-2023/main/docs/img/quantum_hoops.jpg" style="display: block; margin: auto; height: 400px;" />
 
 ### Regularity conditions
 - Data is i.i.d. with density $f_\theta(y)$

@@ -20,9 +20,21 @@ My office hours will be held right after section on Thursdays, 4:30-6:30 PM, in 
 
 Yes.
 
+### Is there a queue for OH?
+
+**No.** 
+
+I eschew the queue. Most students have the same questions and it's pretty easy to move around and gather people with similar questions.
+
+Office hours often have guest TFs, like Jason Zhou, who sometimes gets bored in his Stat 149 OH and will help out with Stat 111. 
+
+### What's covered in section?
+
+My section covers the material for the week including the lecture that immediately precedes it. Section material will be relevant for the homework due 8 days after section, not 1 day.
+
 ### Help! I can't make it to in-person section or office hours. 
 
-First, try posting on [Ed](https://edstem.org/us/courses/32950/discussion/). Make the question *private* if it involves your personal work that would violate the Honor Code if shared for every student. Make the question *public* if it's a general clarifying question, including questions about how a problem is worded/expectations of work, content covered in lecture or the textbook, or course guidelines. 
+First, try posting on [Ed](https://edstem.org/us/courses/32950/discussion/). Make the question *private* if it involves your personal work that would violate the Honor Code if shared for every student. Make the question *public* if it's general clarification, including questions about how a problem is worded, expectations of work, content covered in lecture or the textbook, or course guidelines. 
 
 If a question is urgent, do NOT email me because I already get instant email notifications from Ed (it is categorically worse because on Ed the entire teaching staff can respond to help you). The only faster way I would respond is through instant messaging services, which I will not publicize and you will have to ask for in-person or through email. 
 
