@@ -65,7 +65,7 @@ In what ways should we expect the independence assumption to be violated?
 
 #### 3.2.2 Coverage probability
 
-Each CI collected on a concentration is constructed to have 95\% coverage probability. Is it true that the *entire experiment* has the same coverage probability? That is, can we say "If we repeated this experiment, we would expect that *all of our CIs* would cover the true value of their respective estimands $100(1 - \alpha)$ percent of the time." 
+Each CI collected on a concentration is constructed to have 95 percent coverage probability. Is it true that the *entire experiment* has the same coverage probability? That is, can we say "If we repeated this experiment, we would expect that *all of our CIs* would cover the true value of their respective estimands $100(1 - \alpha)$ percent of the time." 
 
 If false, evaluate the coverage probability of the entire experiment. 
 
@@ -106,8 +106,8 @@ Show that the Poisson is a member of the NEF and use properties of the NEF to de
 
 ### 5.2 Confidence interval using MLE
 
-Using the results from (5.1), construct an asymptotic $100(1 - \alpha)$ \% confidence interval. 
+Using the results from (5.1), construct an asymptotic $100(1 - \alpha)$ percent confidence interval. 
 
 ### 5.3 Confidence interval 
 
-Replace the estimand in (5.2) with an appropriate statistic to construct an alternate 100(1−α) \% CI.
+Replace the estimand in (5.2) with an appropriate statistic to construct an alternate 100(1−α) percent CI.
