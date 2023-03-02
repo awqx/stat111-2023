@@ -27,7 +27,7 @@ $$
 - Data is i.i.d. with density $f_\theta(y)$
 - Support of the density does not depend on $\theta$ (the estimand of interest)
 	- Counterexample: estimating $\theta$ for $\textrm{Unif}(0, \theta)$
-- $\frac{\partial^3}{\partial \theta^2} f(y; \theta)$ exists
+- $\frac{\partial^3}{\partial \theta^3} f(y; \theta)$ exists
 - $\theta^\ast$ is *not* on the boundary of parameter space
 - Can DUThIS
 	- Properties of expectation for score function requires DUThIS

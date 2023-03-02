@@ -20,7 +20,8 @@ So, taking the negative expectation of the latter, we have that fisher info is i
 - If we were to plot the log-likelihood, we would see low curvature around the MLE when $\sigma^2$ is large
 	- Versus very peaked for low $\sigma^2$
 
-**Ex** (German tank problem). Observed data is the observed serial numbers of the tanks. We want the total number of tanks, $t$. Assume our observed serial numbers are a simple random sample. 
+**Ex** (
++6German tank problem). Observed data is the observed serial numbers of the tanks. We want the total number of tanks, $t$. Assume our observed serial numbers are a simple random sample. 
 
 Our likelihood function is:
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Syllabus
-rank: 6
+rank: 10
 ---
 
 Here's a quick, bulleted list of information found on the syllabus that you might want to search intermittently. I've omitted things people should know by now, like where/when the class is and the simultaneous enrollment policy.

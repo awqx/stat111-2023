@@ -1,7 +1,7 @@
 ---
 layout: default
 title: R Bootcamp
-rank: 3
+rank: 9
 ---
 
 I use Windows, so I may get some MacOS shortcuts wrong.
