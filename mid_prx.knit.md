@@ -1,8 +1,13 @@
 ---
-layout: post
-title: Midterm practice 
-exam: 1
+title: ''
+author: "Al Xin"
+date: "2023-03-02"
+output:
+  pdf_document: default
+  html_document: default
 ---
+
+# Midterm practice
 
 This practice material is expected to take longer than 75 minutes. If one problem is  incomplete after 75 minutes you're probably fine for pacing. If 2+ problems are unfinished, you may need to drill practice problems for speed so you have time to check answers during the midterm. 
 

@@ -1,0 +1,285 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdfauthor={Al Xin},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{Al Xin}
+\date{2023-03-02}
+
+\begin{document}
+
+\hypertarget{midterm-practice}{%
+\section{Midterm practice}\label{midterm-practice}}
+
+This practice material is expected to take longer than 75 minutes. If
+one problem is incomplete after 75 minutes you're probably fine for
+pacing. If 2+ problems are unfinished, you may need to drill practice
+problems for speed so you have time to check answers during the midterm.
+
+\hypertarget{truefalse}{%
+\subsection{1 True/false}\label{truefalse}}
+
+If false, explain why. For people simulating a midterm, don't spend too
+long on this section at the expense of working on other practice. If
+you're spending longer than 2 minutes on any T/F question, skip it and
+look up the solution later.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Asymptotically, the MLE is unbiased.
+\item
+  Asymptotically, the MLE has the lowest MSE of any estimator.
+\item
+  If a sequence converges in distribution to a constant, then it also
+  converges in probability to that constant.
+\item
+  Given a sequence \(T_1, T_2, \dots\) of estimators for the estimand
+  \(\theta\) such that \(\mathbb{E}[T_i] = \theta\) for any \(i\), then
+  the estimator is consistent, i.e., \(T_n \overset{p}{\to} \theta\).
+\item
+  By the bias-variance tradeoff, for any given estimator, an alternate
+  estimator with lower bias will have higher variance.
+\item
+  The MoM estimator is guaranteed to be unbiased.
+\item
+  If \(\mathbf T\) is a sufficient statistic for the data, then we can
+  find the MLE using only \(\mathbf T\) without observing the entirety
+  of the data.
+\item
+  A given likelihood function will have a unique sufficient statistic.
+\item
+  Removing multiplicative constants from log-likelihood calculation
+  before finding the MLE will result in a change of the point estimate
+  of the MLE.
+\item
+  For \(n\) observations, the Fisher information of the data is always
+  \(n\) times the Fisher information of a single observation.
+\item
+  The MLE of the parameter \(\theta\) for a Uniform distribution from
+  \(0, \theta\) is asymptotically Normal with variance given as the
+  inverse of the Fisher info of one observation.
+\item
+  If \(X, Y\) are independent, then \(g(X), h(Y)\) are also independent
+  for functions \(g, h\).
+\end{enumerate}
+
+\hypertarget{exponential-modeling}{%
+\subsection{2 Exponential modeling}\label{exponential-modeling}}
+
+Emily sets up a sensor to detect radioactive decay from a sample. Assume
+that the times between radioactive particle detection can be modeled as
+Exponential with rate parameter \(\lambda\), with units in minutes. Data
+is collected in the form \(y_1, y_2, \dots, y_n\), where \(y_i\) is the
+interarrival time between the \(i\)th and \(i - 1\)th particle (where
+\(y_0 = 0\)).
+
+\hypertarget{mle}{%
+\subsubsection{2.1 MLE}\label{mle}}
+
+\hypertarget{likelihood-function}{%
+\paragraph{2.1.1 Likelihood function}\label{likelihood-function}}
+
+Write out the likelihood, log-likelihood, and solve for the MLE.
+
+\hypertarget{nef}{%
+\paragraph{2.1.2 NEF}\label{nef}}
+
+Verify the above using properties of NEFs.
+
+\hypertarget{broken-sensor}{%
+\subsubsection{2.2 Broken sensor}\label{broken-sensor}}
+
+When setting up the sensor, Emily finds that it automatically shuts down
+every hour. Emily can't figure out how to stop this, but can jerry-rig a
+setup to restart the sensor when it turns off. Emily can record the
+number of times the sensor restarts but not the times when it happens.
+
+Rewrite the likelihood and solve for the MLE.
+
+\hypertarget{sleep-average}{%
+\subsection{3 Sleep average}\label{sleep-average}}
+
+This is a pretty contrived setup, so ignore how this would be a
+questionable experiment IRL.
+
+Sia is researching whether the average sleep time of Harvard students
+differs from the 2013 reported national average of 6.8 hours
+(\href{https://news.gallup.com/poll/166553/less-recommended-amount-sleep.aspx}{Gallup}).
+She (somehow) gets the average sleep data for \(n\) students and
+subtracts \(6.8\) from the collected data (to center the data around
+zero if average of Harvard students and the national average line up).
+
+Sia doesn't know the standard deviation, but she can estimate it with
+the data (assume \(n\) is large enough). Assume we're using the sample
+variance to estimate variance and taking the square root to get sample
+error.
+
+\hypertarget{single-ci}{%
+\subsubsection{3.1 Single CI}\label{single-ci}}
+
+Clarification: the estimand of interest is the mean of the data after
+6.8 has been subtracted off. So your answer should not have 6.8
+anywhere.
+
+Let the sample mean of the data (post-subtraction) be the point estimate
+for the estimand. Use the appropriate pivot to construct a
+\(100(1 - \alpha)\) percent confidence interval.
+
+\hypertarget{multiple-cis}{%
+\subsubsection{3.2 Multiple CIs}\label{multiple-cis}}
+
+Sia wants to also look at whether certain concentrations deviate from
+the national average. So, she sorts her data into \(m\) concentrations.
+For this problem, assume that the concentrations are independent.
+
+\hypertarget{independence-assumptions}{%
+\paragraph{3.2.1 Independence
+assumptions}\label{independence-assumptions}}
+
+In what ways should we expect the independence assumption to be
+violated?
+
+\hypertarget{coverage-probability}{%
+\paragraph{3.2.2 Coverage probability}\label{coverage-probability}}
+
+Each CI collected on a concentration is constructed to have 95 percent
+coverage probability. Is it true that the \emph{entire experiment} has
+the same coverage probability? That is, can we say ``If we repeated this
+experiment, we would expect that \emph{all of our CIs} would cover the
+true value of their respective estimands \(100(1 - \alpha)\) percent of
+the time.''
+
+If false, evaluate the coverage probability of the entire experiment.
+
+\hypertarget{adjusted-cis}{%
+\paragraph{3.2.3 Adjusted CIs}\label{adjusted-cis}}
+
+Spoiler: 3.2.2 is false. Propose an adjusted CI for each of the \(m\)
+concentrations such that the entire experiment has \(100(1 - \alpha)\)
+percent coverage.
+
+\hypertarget{uniform-cis}{%
+\subsection{4 Uniform CIs}\label{uniform-cis}}
+
+Let \(Y_1, \dots, Y_n \overset{i.i.d.}{\sim} \textrm{Unif}(0, \theta)\).
+
+\hypertarget{properties-of-the-mle}{%
+\subsubsection{4.1 Properties of the MLE}\label{properties-of-the-mle}}
+
+\hypertarget{regularity-conditions}{%
+\paragraph{4.1.1 Regularity conditions}\label{regularity-conditions}}
+
+(This is a review of material covered in homework and lecture examples).
+Solve for the MLE. Identify any violations of regularity conditions.
+
+\hypertarget{bias-of-the-mle}{%
+\paragraph{4.1.2 Bias of the MLE}\label{bias-of-the-mle}}
+
+Solve for the bias given \(n\). Is it possible to construct an unbiased
+estimator based on your solution? Also, is the MLE asymptotically
+unbiased?
+
+\hypertarget{confidence-intervals}{%
+\subsubsection{4.2 Confidence intervals}\label{confidence-intervals}}
+
+Let \(Y_{(n)}\) be the \(n\)th order statistic (i.e., the maximum of
+observations). Consider the two interval estimators:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \([a Y_{(n)}, b Y_{(n)}]\), where \(1 \leq a \leq b\)
+\item
+  \([c + Y_{(n)}, d + Y_{(n)}]\), where \(0 \leq c \leq d\)
+\end{enumerate}
+
+In which of these cases does the coverage probability depend on
+\(\theta\)?
+
+\hypertarget{poisson-fun-times}{%
+\subsection{5 Poisson fun times}\label{poisson-fun-times}}
+
+Let \(Y_1, \dots, Y_n \overset{i.i.d.}{\sim} \textrm{Pois}(\lambda)\).
+
+\hypertarget{poisson-nef}{%
+\subsubsection{5.1 Poisson NEF}\label{poisson-nef}}
+
+Show that the Poisson is a member of the NEF and use properties of the
+NEF to determine the MLE and its asymptotic distribution
+
+\hypertarget{confidence-interval-using-mle}{%
+\subsubsection{5.2 Confidence interval using
+MLE}\label{confidence-interval-using-mle}}
+
+Using the results from (5.1), construct an asymptotic
+\(100(1 - \alpha)\) percent confidence interval.
+
+\hypertarget{confidence-interval}{%
+\subsubsection{5.3 Confidence interval}\label{confidence-interval}}
+
+Replace the estimand in (5.2) with an appropriate statistic to construct
+an alternate 100(1−α) percent CI.
+
+\end{document}
