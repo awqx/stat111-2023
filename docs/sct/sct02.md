@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Section 02
+title: Section 02 - Asymptotics and MLE properties
 date: 2023-02-09
 section: 2
 ---

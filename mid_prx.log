@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.27)  2 MAR 2023 20:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.27)  2 MAR 2023 20:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -303,8 +303,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count285
 \l__pdf_internal_box=\box53
-)
-No file mid_prx.aux.
+) (./mid_prx.aux)
 \openout1 = `mid_prx.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
@@ -366,6 +365,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring OFF on input line 68.
+(./mid_prx.out) (./mid_prx.out)
 \@outlinefile=\write3
 \openout3 = `mid_prx.out'.
 
@@ -378,8 +378,8 @@ Please type another file name for output
 l.68 \begin{document}
                       
 Here is how much of TeX's memory you used:
- 10284 strings out of 477984
- 160978 string characters out of 5837823
+ 10290 strings out of 477984
+ 161050 string characters out of 5837823
  1849382 words of memory out of 5000000
  30375 multiletter control sequences out of 15000+600000
  515277 words of font info for 33 fonts, out of 8000000 for 9000

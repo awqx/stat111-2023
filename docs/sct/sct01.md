@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Section 01
+title: Section 01 - Basics, MLE, MoM
 date: 2023-02-02
 section: 1
 ---

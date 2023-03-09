@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Section 03
+title: Section 03 - Asymptotics, interval estimation
 date: 2023-02-16
 section: 3
 ---
